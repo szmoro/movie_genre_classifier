@@ -8,4 +8,4 @@ services:
     # Connecting spacy_model and training.ipynb as volumes to persist modifications and training results outside of the container
     volumes: 
       - ./spacy_model:/training/spacy_model
-      - ./training.ipynb:/training/spacy_model
+      - ./training.ipynb:/training/training.ipynb

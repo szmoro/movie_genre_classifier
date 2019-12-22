@@ -19,7 +19,7 @@ def classify_movie(title, description):
     response = requests.request("POST", url, data=json.dumps(payload), headers={ 'Content-Type': 'application/json' })
 
     # In case of error response (status code 400 or 500) print error message
-    if response.status_code // 4:
+    if response.status_code // 400:
         print('Unable to retrieve answer')
     else:
         # Retrieving prediction with highest score and printing result

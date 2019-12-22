@@ -2,8 +2,7 @@ FROM continuumio/anaconda3
 
 WORKDIR /training
 
-# Adding the training notebook and the MovieLens dataset
-ADD ./training.ipynb ./training.ipynb
+# Adding the MovieLens dataset
 ADD ./movies_metadata.csv ./movies_metadata.csv
 
 # Installing Spacy and downloading the en_core_web_lg model
