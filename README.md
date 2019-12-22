@@ -51,7 +51,7 @@ Options:
   --help              Show this message and exit.
 ```
  
-The movie_classifier_cli package comes pre-installed in the movie_classifier container and it is ready to use when the container is launched. There are two ways of interacting with the CLI applicatio: the user can either open a shell inside the container and then run the CLI movie_classifier command
+The movie_classifier_cli package comes pre-installed in the movie_classifier container and it is ready to use when the container is launched. There are two ways of interacting with the CLI application: the user can either open a shell inside the container and run the CLI movie_classifier command
 
 ```bash
 docker exec -it movieclassifier_movie-classifier_1 /bin/bash
