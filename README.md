@@ -20,8 +20,14 @@ To launch the movie_classifier application clone this repository and cd into the
 git clone https://github.com/szmoro/movie_genre_classifier.git
 cd movie_genre_classifier/movie_classifier
 ```
+Then download and unzip the NLP model
 
-Then just run:
+```bash
+curl -L -o spacy_model.zip https://www.dropbox.com/s/lgs9mrb892ht0a4/spacy_model.zip?dl=1
+unzip spacy_model.zip
+```
+
+And then just run:
 
 ```bash
 docker-compose up

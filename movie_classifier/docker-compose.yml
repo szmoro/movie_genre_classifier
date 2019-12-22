@@ -1,0 +1,7 @@
+version: '3'
+services:
+  movie-classifier:
+    image: movie-classifier
+    build: .
+    ports:
+      - "8000:8000"
