@@ -2,9 +2,9 @@
 
 ## Overview
 
-This project contains a movie genre classifier. It is entirely developed in Python, using the [Spacy](https://spacy.io/) NLP library, deployed via Docker and accessible via CLI.
+This project contains a movie genre classifier. It is entirely developed in Python, using the [Spacy](https://spacy.io/) NLP library, deployed via Docker and accessible via a simple CLI application.
 
-The movie_classifier uses the Spacy "core_web_en_lg" model, with an additional text classifier module trained to predict the genre of the movie given in input from its description. The model is exposed via a single API endpoint returning the model predictions. Once launched, the application is accessible via CLI, with the movie_classifier command. The CLI interface takes in input the movie title and description, it sends an HTTP request to the API and returns the genre with the highest confidence score predicted by the model. 
+The movie_classifier application uses the Spacy "core_web_en_lg" model, with an additional text classifier module trained to predict the genre of the movie given in input from its description. The model is internally exposed via a single API endpoint. Once launched, the application is accessible via CLI, with the movie_classifier command. The CLI interface takes in input the movie title and description, it sends an HTTP request to the API and returns the genre with the highest confidence score predicted by the model. 
 
 This repository is organized in two subfolders:
  - movie_classifier: contains the movie_classifier application, composed of the spacy_model folder, the movieAPI.py API and the movie_classifier_cli python package.
@@ -17,7 +17,7 @@ This repository is organized in two subfolders:
 To launch the movie_classifier application clone this repository and cd into the movie_classifier folder:
 
 ```bash
-git clone ...
+git clone https://github.com/szmoro/movie_genre_classifier.git
 cd movie_genre_classifier/movie_classifier
 ```
 
@@ -31,7 +31,7 @@ This command will build and run the movie_classifier docker container; the termi
 
 ### Using the CLI application
 
-The CLI interface is provided by the movie_classifier_cli package and it is preinstalled in the movie_classifier container. It has the following signature:
+The CLI interface, which is provided by the movie_classifier_cli package, has the following signature:
 
 ```bash
 Usage: movie_classifier [OPTIONS]
@@ -44,8 +44,8 @@ Options:
   --description TEXT  The movie description. A mandatory non-empty string.
   --help              Show this message and exit.
 ```
-
-There are two ways of interacting with the CLI application. The user can either open a shell inside the container and then run the CLI movie_classifier command
+ 
+The movie_classifier_cli package comes pre-installed in the movie_classifier container and it is ready to use when the container is launched. There are two ways of interacting with the CLI applicatio: the user can either open a shell inside the container and then run the CLI movie_classifier command
 
 ```bash
 docker exec -it movieclassifier_movie-classifier_1 /bin/bash
@@ -74,7 +74,7 @@ docker exec movieclassifier_movie-classifier_1 movie_classifier --title "Othello
 As previously mentioned, the model predictions can be obtained via a single API call. This API is implemented with [FastAPI](https://github.com/tiangolo/fastapi) which is a modern, fast (high-performance), web framework for building APIs with Python 3.6+ based on standard Python type hints.
 FastAPI automatically generates the OpenAPI 3.0 documentation of the API and exposes it at the /docs endpoint. The container exposes the API on port 8000, so after launching it, the user can explore the API documentation at http://localhost:8000/docs. Here the user will be able to access the /genre endpoint documentation and even perform some test calls on it to explore the API request and response formats.
 
-Here is an example of a request and a response:
+Here is an example of a request with its response:
 
 ```bash
 curl --location --request POST 'localhost:8000/genre' \
@@ -97,7 +97,7 @@ curl --location --request POST 'localhost:8000/genre' \
 
 The model contained in the movie_classifier/spacy_model folder was trained on the [MovieLens](https://www.kaggle.com/rounakbanik/the-movies-dataset/version/7#movies_metadata.csv) dataset using the training.ipynb jupyter notebook that can be found in the training folder.
 
-The model was obtained reusing the embedding produced by the Spacy "en_core_web_lg" model and training a multi-label classifier on top of it. The classifier was trained with early stopping, using a batch_size of 64 and a patience of 5.
+The model was obtained by training a multi-label classifier on the embedding produced by the Spacy "en_core_web_lg" model. The classifier was trained with early stopping, using a batch_size of 64 and a patience of 5.
 
 To obtain a balanced training dataset, only the genres that appeared in at least 5000 movies were selected. After applying this filter, only 5 genres were left: 
 - Action
@@ -132,4 +132,4 @@ cd movie_classifier
 docker-compose up --build
 ```
 
-These commands will copy the newly trained spacy nlp model into the movie_classifier folder and rebuild the container so that when it is launched it uses the new model. # movie_genre_classifier
+These commands will copy the newly trained spacy nlp model into the movie_classifier folder and rebuild the container so that when it is launched it uses the new model. 
