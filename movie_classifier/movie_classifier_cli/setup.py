@@ -5,9 +5,7 @@ setup(
     version='0.1',
     py_modules=['movieCLI'],
     install_requires=[
-        'Click',
-        'Spacy',
-        'FastAPI',
+        'Click'
     ],
     entry_points={
         'console_scripts': [
