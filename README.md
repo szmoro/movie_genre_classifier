@@ -54,7 +54,7 @@ Options:
 The movie_classifier_cli package comes pre-installed in the movie_classifier container and it is ready to use when the container is launched. There are two ways of interacting with the CLI application: the user can either open a shell inside the container and run the CLI movie_classifier command
 
 ```bash
-docker exec -it movieclassifier_movie-classifier_1 /bin/bash
+docker exec -it movie_classifier /bin/bash
 movie_classifier --title "Othello" --description "The evil Iago pretends to be friend of Othello in order to manipulate him to serve his own end in the film version of this Shakespeare classic."
 
 {'description': 'The evil Iago pretends to be friend of Othello in order to '
@@ -67,7 +67,7 @@ movie_classifier --title "Othello" --description "The evil Iago pretends to be f
 or run the command directly from outside the container with the "docker exec" directive
 
 ```bash
-docker exec movieclassifier_movie-classifier_1 movie_classifier --title "Othello" --description "The evil Iago pretends to be friend of Othello in order to manipulate him to serve his own end in the film version of this Shakespeare classic."
+docker exec movie_classifier movie_classifier --title "Othello" --description "The evil Iago pretends to be friend of Othello in order to manipulate him to serve his own end in the film version of this Shakespeare classic."
 
 {'description': 'The evil Iago pretends to be friend of Othello in order to '
                 'manipulate him to serve his own end in the film version of '

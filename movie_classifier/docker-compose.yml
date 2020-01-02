@@ -1,6 +1,7 @@
 version: '3'
 services:
   movie-classifier:
+    container_name: movie_classifier
     image: movie-classifier
     build: .
     ports:
